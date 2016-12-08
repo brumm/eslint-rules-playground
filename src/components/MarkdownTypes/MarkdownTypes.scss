@@ -1,0 +1,39 @@
+
+.code-block {
+  position: relative;
+}
+
+.button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  border: none;
+  background: none;
+  padding: 0;
+
+  &:not(:hover) .label {
+    display: none;
+  }
+}
+
+.label {
+  margin-right: 10px;
+  background-color: #FAFAFA;
+  box-shadow: 0 0 3px 1px #FAFAFA;
+  padding: 3px 5px;
+  border-radius: 10px;
+}
+
+.icon {
+  padding: 5px 7px;
+  background: white;
+  color: #333;
+  border-radius: 2px;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.2),
+    0 1px 5px rgba(0, 0, 0, 0.1);
+}
+
+.heading {
+  margin-bottom: 20px;
+}
