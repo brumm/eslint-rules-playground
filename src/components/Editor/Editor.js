@@ -49,7 +49,7 @@ export default class Editor extends React.Component {
 
       if (this.props.shouldLint) {
         component.getCodeMirrorInstance().registerHelper(
-          'lint', 'jsx', this.lint
+          'lint', 'javascript', this.lint
         )
       }
     }

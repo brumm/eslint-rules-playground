@@ -28,7 +28,7 @@ export const CodeBlock = ({ language, literal, setCode }) => (
       onClick={() => setCode(literal)}
     >
       <span className={css.label}>Load code into editor</span>
-      <Octicon className={css.icon} name='sign-in' />
+      <Octicon className={css.icon} name='repo-push' />
     </button>
 
     <SyntaxHighlighter
