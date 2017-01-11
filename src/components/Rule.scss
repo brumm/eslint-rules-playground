@@ -10,10 +10,24 @@
   padding: 0 10px;
   background-color: #F7F7F7;
   box-shadow: 0 1px 0 #DDDDDD;
+  display: flex;
+  flex-grow: 1;
+  align-items: center;
 }
 
 .body-container {
   overflow: hidden;
+}
+
+.button {
+  border: none;
+  padding: 5px 7px;
+  background: white;
+  color: #333;
+  border-radius: 2px;
+  box-shadow:
+    0 0 0 1px rgba(0, 0, 0, 0.2),
+    0 1px 5px rgba(0, 0, 0, 0.1);
 }
 
 .body {
@@ -90,4 +104,18 @@
     padding: 1rem;
   }
 
+}
+
+.mini-editor {
+  margin-bottom: 20px;
+
+  :global {
+    .CodeMirror {
+      width: 100%;
+      height: auto !important;
+      background-color: #FAFAFA;
+      font-family: Consolas;
+      line-height: 20px;
+    }
+  }
 }

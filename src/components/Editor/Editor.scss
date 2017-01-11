@@ -1,0 +1,8 @@
+.container {
+  :global {
+    .CodeMirror {
+      width: 50vw;
+      height: calc(100vh - 50px) !important;
+    }
+  }
+}

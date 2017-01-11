@@ -2,14 +2,9 @@ import React from 'react'
 import Flex from 'flex-component'
 import SimpleInput from 'react-simple-input'
 import Switch from 'react-flexible-switch'
+import Match from 'react-router/Match'
 
-import CodeMirror from 'react-codemirror'
-
-import 'react-codemirror/node_modules/codemirror/mode/javascript/javascript'
-import 'react-codemirror/node_modules/codemirror/lib/codemirror.css'
-
-
-import Editor from 'components/Editor'
+import Editor from 'components/Editor/Editor'
 import RulesContainer from 'components/RulesContainer/RulesContainer'
 
 import css from './App.scss'
@@ -18,7 +13,17 @@ import css from './App.scss'
 class App extends React.Component {
   state = {
     filterText: '',
-    localLinterConfig: {},
+    localLinterConfig: {
+      parserOptions: {
+        ecmaVersion: 6,
+        ecmaFeatures: {
+          experimentalObjectRestSpread: true,
+          impliedStrict: true,
+          jsx: true
+        },
+        sourceType: 'module'
+      },
+    },
     localRuleConfig: {},
     editorValue: `var foo = "bar"`,
     showEditor: true,
@@ -52,11 +57,15 @@ class App extends React.Component {
       ...this.state.localRuleConfig,
     }
 
+    const activeLinterConfig = {
+      ...defaultLinterConfig,
+      ...this.state.localLinterConfig,
+    }
+
     return (
       <Flex direction='column' className={css.app}>
 
         <Flex shrink={0} className={css.header}>
-
           <Flex justifyContent='center' style={{ width: '50vw', padding: '0 10px' }} alignItems='center'>
               <div onClick={() => this.setState({ showEditor: false })}>Eslint Config</div>
               <Switch
@@ -83,30 +92,35 @@ class App extends React.Component {
         <Flex>
           {showEditor ? (
             <Editor
+              shouldLint
               value={this.state.editorValue}
               onChange={this.updateCode}
               activeRuleConfig={activeRuleConfig}
+              activeLinterConfig={activeLinterConfig}
             />
           ) : (
-            <CodeMirror
+            <Editor
               value={JSON.stringify(activeRuleConfig, null, '  ')}
               options={{
-                lineNumbers: true,
-                readOnly: true,
-                mode: 'javascript',
+                lineNumbers: false,
+                readOnly: true
               }}
             />
           )}
 
-          <Flex className={css.rules} direction='column'>
-            <RulesContainer
-              ruleDefinitions={ruleDefinitions}
-              activeRuleConfig={activeRuleConfig}
-              filterText={this.state.filterText}
-              onToggleRule={this.onToggleRule}
-              setCode={this.updateCode}
-            />
-          </Flex>
+            <Flex className={css.rules} direction='column'>
+              <Match exactly pattern="/:ruleId?" render={({ params: { ruleId = undefined }}) => (
+                <RulesContainer
+                  expandedId={ruleId}
+                  ruleDefinitions={ruleDefinitions}
+                  activeRuleConfig={activeRuleConfig}
+                  filterText={this.state.filterText}
+                  onToggleRule={this.onToggleRule}
+                  setCode={this.updateCode}
+                />
+              )} />
+            </Flex>
+          )} />
         </Flex>
 
       </Flex>

@@ -8,10 +8,11 @@ import css from './RulesContainer.scss'
 
 export default class RulesContainer extends React.Component {
 
-  shouldComponentUpdate({ activeRuleConfig, filterText }) {
+  shouldComponentUpdate({ activeRuleConfig, filterText, expandedId }) {
     return (
-      !isEqual(this.props.activeRuleConfig, activeRuleConfig) ||
-      !isEqual(this.props.filterText, filterText)
+      this.props.expandedId !== expandedId ||
+      this.props.filterText !== filterText ||
+      !isEqual(this.props.activeRuleConfig, activeRuleConfig)
     )
   }
 
@@ -29,7 +30,10 @@ export default class RulesContainer extends React.Component {
       <div className={css.scrollContainer}>
         {Object.keys(groupedRules).map(label => {
           const subRules = groupedRules[label]
-            .filter(({ id }) => id.includes(filterText))
+            .filter(({ id, docs: { category }}) => (
+              id.toLowerCase().includes(filterText.toLowerCase()) ||
+              category.toLowerCase().includes(filterText.toLowerCase())
+            ))
 
           if (subRules.length) {
             return (
@@ -37,10 +41,13 @@ export default class RulesContainer extends React.Component {
                 <div className={css.label}>{label}</div>
                 {subRules.map(rule => (
                   <Rule
-                    isActive={activeRuleConfig[rule.id] !== 'off'}
-                    onToggleRule={onToggleRule}
                     key={rule.id}
+                    isActive={activeRuleConfig[rule.id] !== 'off'}
+                    isExpanded={this.props.expandedId === rule.id}
+                    expandSection={expandedId => this.toggleSection(expandedId)}
+                    onToggleRule={onToggleRule}
                     rule={rule}
+                    ruleValue={activeRuleConfig[rule.id]}
                     setCode={setCode}
                   />
                 ))}

@@ -35,7 +35,7 @@ export const CodeBlock = ({ language, literal, setCode }) => (
       language={language}
       style={theme}
       customStyle={{
-        marginTop: 20,
+        margintop: 20,
         marginBottom: 20,
         padding: 10,
         backgroundColor: '#fafafa',

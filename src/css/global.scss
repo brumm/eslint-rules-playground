@@ -1,10 +1,12 @@
 @import "reset";
 @import "defaults";
 
+body {
+  overflow: hidden;
+}
+
 :global {
   .CodeMirror {
-    width: 50vw;
-    height: 100vh !important;
     font-family: Consolas !important;
     font-size: 16px;
     line-height: 20px;
@@ -27,5 +29,15 @@
     padding-left: 20px !important;
     background-position: left center !important;
     font-family: Consolas;
+  }
+
+  .CodeMirror-gutters {
+    border: none !important;
+    background: none !important;
+    padding-right: 20px;
+  }
+
+  .CodeMirror-linenumber {
+    color: #ddd !important;
   }
 }

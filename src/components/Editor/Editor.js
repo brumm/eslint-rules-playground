@@ -1,11 +1,13 @@
 import React from 'react'
 import CodeMirror from 'react-codemirror'
 
-import 'react-codemirror/node_modules/codemirror/mode/javascript/javascript'
+import 'react-codemirror/node_modules/codemirror/mode/jsx/jsx'
 import 'react-codemirror/node_modules/codemirror/lib/codemirror.css'
 
 import 'react-codemirror/node_modules/codemirror/addon/lint/lint.css'
 import 'react-codemirror/node_modules/codemirror/addon/lint/lint'
+
+import css from './Editor.scss'
 
 
 function getSeverity(error) {
@@ -37,12 +39,19 @@ function getPos(error, from) {
 
 export default class Editor extends React.Component {
 
+  static defaultProps = {
+    className: css.container
+  }
+
   onCodeMirrorInstance = component => {
     if (component !== null) {
       this.codeMirror = component.getCodeMirror()
-      component.getCodeMirrorInstance().registerHelper(
-        'lint', 'javascript', this.lint
-      )
+
+      if (this.props.shouldLint) {
+        component.getCodeMirrorInstance().registerHelper(
+          'lint', 'jsx', this.lint
+        )
+      }
     }
   }
 
@@ -57,13 +66,7 @@ export default class Editor extends React.Component {
   get lint() {
     return text => (
       window.eslint.verify(text, {
-        parserOptions: {
-          ecmaVersion: 6,
-          sourceType: module,
-          ecmaFeatures: {
-              jsx: true
-          }
-        },
+        ...this.props.activeLinterConfig,
         rules: this.props.activeRuleConfig
       }).map(error => ({
         message: `${error.ruleId || 'Error'}: ${error.message}`,
@@ -77,13 +80,15 @@ export default class Editor extends React.Component {
   render() {
     const options = {
       lineNumbers: true,
-      mode: 'javascript',
-      gutters: ['CodeMirror-lint-markers'],
-      lint: true,
+      mode: 'jsx',
+      gutters: this.props.shouldLint ? ['CodeMirror-lint-markers'] : [],
+      lint: this.props.shouldLint,
+      ...this.props.options
     }
 
     return (
       <CodeMirror
+        className={this.props.className}
         ref={this.onCodeMirrorInstance}
         value={this.props.value}
         onChange={this.props.onChange}
