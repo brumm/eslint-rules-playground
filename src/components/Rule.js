@@ -25,7 +25,7 @@ export default class Rule extends React.Component {
   }
 
   fetchDocs(id) {
-    return fetch(`https://raw.githubusercontent.com/eslint/eslint/master/docs/rules/${id}.md`)
+    return fetch(`https://cdn.rawgit.com/eslint/eslint/master/docs/rules/${id}.md`)
       .then(res => res.text())
   }
 
