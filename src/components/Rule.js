@@ -57,7 +57,7 @@ export default class Rule extends React.Component {
             switchStyles={{ width: 35, padding: 3, borderColor: '#DDDDDD' }}
             value={isActive}
           />
-          <Link to={`/${isExpanded ? '' : name}`} className={css.header}>
+          <Link to={`/${isExpanded ? '' : name}`} className={css.link}>
             <Flex
               alignItems='center'
               style={{

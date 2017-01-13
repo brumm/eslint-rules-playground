@@ -13,6 +13,14 @@
   display: flex;
   flex-grow: 1;
   align-items: center;
+  z-index: 10;
+  position: sticky;
+  top: 0;
+}
+
+.link {
+  display: flex;
+  flex-grow: 1;
 }
 
 .body-container {
@@ -35,6 +43,7 @@
   padding: 20px 10px 40px;
   font-size: 13px;
   line-height: 1.42;
+  overflow: hidden;
 
   a,
   a:visited {
