@@ -15,6 +15,11 @@ import css from './Rule.scss'
 
 export default class Rule extends React.Component {
 
+  scrollIntoView(node) {
+    node = node && node._reactInternalInstance._renderedComponent._hostNode
+    this.props.isExpanded && node && node.scrollIntoView && node.scrollIntoView()
+  }
+
   shouldComponentUpdate({ isExpanded, isActive, ruleValue}) {
     return (
       this.props.ruleValue !== ruleValue ||
@@ -45,7 +50,7 @@ export default class Rule extends React.Component {
 
     return (
       <div className={css.container}>
-        <Flex className={css.header}>
+        <Flex className={css.header} ref={node => this.scrollIntoView(node)}>
           <Switch
             onChange={active => onToggleRule(name, active)}
             circleStyles={{ diameter: 15 }}
