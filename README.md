@@ -1,5 +1,5 @@
 # eslint-rules-playground
 
-Demo: eslint-playground.surge.sh
+Demo: [eslint-playground.surge.sh](eslint-playground.surge.sh)
 
 ![](http://i.imgur.com/ajJ8osj.png)
