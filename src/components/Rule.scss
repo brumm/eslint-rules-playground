@@ -1,7 +1,9 @@
 
 .container {
-  & + & {
-    border-top: 1px solid #DDDDDD;
+  & + & .header {
+    box-shadow:
+      0 1px 0 #DDDDDD,
+      0 -1px 0 #DDDDDD;
   }
 }
 
@@ -15,12 +17,36 @@
   align-items: center;
   z-index: 10;
   position: sticky;
-  top: 0;
+  top: 50px;
+  user-select: none;
+
+  &:hover {
+    background-color: darken(#F7F7F7, 1%);
+  }
 }
 
 .link {
+  height: 100%;
+  align-items: center;
   display: flex;
   flex-grow: 1;
+}
+
+.name-container {
+  margin-left: 20px;
+}
+
+.name-inactive {
+  color: mix(#F7F7F7, #333);
+}
+
+.recommended, .expando {
+  text-align: center;
+  width: 12px;
+  color: #DDDDDD;
+}
+.recommended {
+  margin-right: 20px;
 }
 
 .body-container {

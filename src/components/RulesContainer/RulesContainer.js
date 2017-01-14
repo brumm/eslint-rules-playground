@@ -1,6 +1,7 @@
 import React from 'react'
 import groupBy from 'lodash/groupBy'
 import isEqual from 'lodash/isEqual'
+import Flex from 'flex-component'
 
 import Rule from 'components/Rule'
 
@@ -38,7 +39,7 @@ export default class RulesContainer extends React.Component {
           if (subRules.length) {
             return (
               <div key={label}>
-                <div className={css.label}>{label}</div>
+                <Flex alignItems='flex-end' className={css.label}>{label}</Flex>
                 {subRules.map(rule => (
                   <Rule
                     key={rule.id}

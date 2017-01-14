@@ -40,7 +40,8 @@ function getPos(error, from) {
 export default class Editor extends React.Component {
 
   static defaultProps = {
-    className: css.container
+    className: css.container,
+    shouldLint: false,
   }
 
   onCodeMirrorInstance = component => {

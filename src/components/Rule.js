@@ -16,8 +16,9 @@ import css from './Rule.scss'
 export default class Rule extends React.Component {
 
   scrollIntoView(node) {
-    node = node && node._reactInternalInstance._renderedComponent._hostNode
-    this.props.isExpanded && node && node.scrollIntoView && node.scrollIntoView()
+    setTimeout(() => (
+      node.parentElement.parentElement.scrollTop = node.offsetTop - 99
+    ), 100)
   }
 
   shouldComponentUpdate({ isExpanded, isActive, ruleValue}) {
@@ -49,30 +50,25 @@ export default class Rule extends React.Component {
     } = this.props
 
     return (
-      <div className={css.container}>
-        <Flex className={css.header} ref={node => this.scrollIntoView(node)}>
+      <div className={css.container} ref={node => this.props.isExpanded && node && this.scrollIntoView(node)}>
+        <Flex className={css.header}>
           <Switch
             onChange={active => onToggleRule(name, active)}
             circleStyles={{ diameter: 15 }}
             switchStyles={{ width: 35, padding: 3, borderColor: '#DDDDDD' }}
             value={isActive}
           />
+
           <Link to={`/${isExpanded ? '' : name}`} className={css.link}>
-            <Flex
-              alignItems='center'
-              style={{
-                height: '100%',
-                marginLeft: 20, flexGrow: 1,
-                opacity: isActive ? 1 : 0.5,
-              }}
-            >
-              {name}
-              {docs.recommended &&
-                <Octicon style={{ marginLeft: 10, color: '#DDDDDD' }} name='thumbsup' />
-              }
+            <Flex alignItems='center' grow={1} className={css.nameContainer}>
+              <div className={isActive || css.nameInactive}>{name}</div>
             </Flex>
+
+            {docs.recommended &&
+              <Octicon name='thumbsup' className={css.recommended} />
+            }
+            <Octicon className={css.expando} name={isExpanded ? 'dash' : 'plus'} />
           </Link>
-          <Octicon style={{ color: '#DDDDDD' }} name={isExpanded ? 'dash' : 'plus'} />
         </Flex>
 
         {isExpanded &&

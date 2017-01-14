@@ -1,9 +1,18 @@
 .scroll-container {
   overflow-y: auto;
-  border-bottom: 1px solid #DDDDDD;
+  box-shadow: 0 1px 0 #DDDDDD;
+  height: calc(100vh - 50px);
 }
 
 .label {
-  padding: 20px 10px 10px;
-  border-bottom: 1px solid #DDDDDD;
+  user-select: none;
+  background-color: #fff;
+  padding: 0 10px 10px;
+  height: 50px;
+  box-shadow:
+    0 -1px 0 #DDDDDD,
+    0 1px 0 #DDDDDD;
+  z-index: 11;
+  position: sticky;
+  top: 0;
 }

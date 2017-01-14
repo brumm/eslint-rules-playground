@@ -24,7 +24,9 @@ class App extends React.Component {
         sourceType: 'module'
       },
     },
-    localRuleConfig: {},
+    localRuleConfig: {
+      // 'no-unused-vars': 'off'
+    },
     editorValue: `var foo = "bar"`,
     showEditor: true,
   }
@@ -66,15 +68,21 @@ class App extends React.Component {
       <Flex direction='column' className={css.app}>
 
         <Flex shrink={0} className={css.header}>
-          <Flex justifyContent='center' style={{ width: '50vw', padding: '0 10px' }} alignItems='center'>
-              <div onClick={() => this.setState({ showEditor: false })}>Eslint Config</div>
-              <Switch
-                value={showEditor}
-                circleStyles={{ diameter: 15 }}
-                switchStyles={{ width: 35, padding: 3, borderColor: '#DDDDDD', margin: '0 20px' }}
-                onChange={showEditor => this.setState({ showEditor })}
-              />
-              <div onClick={() => this.setState({ showEditor: true })}>Example Code</div>
+          <Flex
+            justifyContent='center'
+            className={css.toggleContainer}
+            alignItems='center'
+          >
+            <img src='http://eslint.org/img/logo.svg' className={css.logo} />
+
+            <div onClick={() => this.setState({ showEditor: false })}>Eslint Config</div>
+            <Switch
+              value={showEditor}
+              circleStyles={{ diameter: 15 }}
+              switchStyles={{ width: 35, padding: 3, borderColor: '#DDDDDD', margin: '0 20px' }}
+              onChange={showEditor => this.setState({ showEditor })}
+            />
+            <div onClick={() => this.setState({ showEditor: true })}>Example Code</div>
           </Flex>
 
           <SimpleInput
