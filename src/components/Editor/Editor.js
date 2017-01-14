@@ -1,5 +1,6 @@
 import React from 'react'
 import CodeMirror from 'react-codemirror'
+import isEqual from 'lodash/isEqual'
 
 import 'react-codemirror/node_modules/codemirror/mode/jsx/jsx'
 import 'react-codemirror/node_modules/codemirror/lib/codemirror.css'
@@ -54,6 +55,14 @@ export default class Editor extends React.Component {
         )
       }
     }
+  }
+
+  shouldComponentUpdate({ activeRuleConfig, activeLinterConfig, value }) {
+    return (
+      this.props.value !== value ||
+      !isEqual(this.props.activeRuleConfig, activeRuleConfig) ||
+      !isEqual(this.props.activeLinterConfig, activeLinterConfig)
+    )
   }
 
   componentDidUpdate() {
