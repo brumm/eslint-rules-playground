@@ -7,6 +7,8 @@
     "build": "nwb build-react-app",
     "clean": "nwb clean-app",
     "start": "nwb serve-react-app",
+    "deploy": "surge --project ./dist/ --domain eslint-playground.surge.sh",
+    "release": "npm run build && cp ./dist/index.html ./dist/200.html && npm run deploy",
     "test": "nwb test",
     "test:coverage": "nwb test --coverage",
     "test:watch": "nwb test --server"
