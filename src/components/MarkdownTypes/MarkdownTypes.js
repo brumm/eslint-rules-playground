@@ -4,14 +4,17 @@ import Octicon from 'react-octicon'
 import RouterLink from 'react-router/Link'
 
 import css from './MarkdownTypes.scss'
+import theme from 'react-syntax-highlighter/dist/styles/tomorrow'
+
 import javascript from 'highlight.js/lib/languages/javascript'
+import diff from 'highlight.js/lib/languages/diff'
 import json from 'highlight.js/lib/languages/json'
 import xml from 'highlight.js/lib/languages/xml'
-import theme from 'react-syntax-highlighter/dist/styles/tomorrow'
 
 registerLanguage('xml', xml)
 registerLanguage('javascript', javascript)
 registerLanguage('json', json)
+registerLanguage('diff', diff)
 
 const isAbsolute = new RegExp('^([a-z]+://|//)', 'i')
 
