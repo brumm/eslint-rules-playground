@@ -22,6 +22,9 @@
 
   &:hover {
     background-color: darken(#F7F7F7, 1%);
+    .expando {
+      color: #4B32C3;
+    }
   }
 }
 
@@ -36,8 +39,8 @@
   margin-left: 20px;
 }
 
-.name-inactive {
-  color: mix(#F7F7F7, #333);
+.name-deprecated {
+  text-decoration: line-through;
 }
 
 .recommended, .expando {
@@ -74,13 +77,14 @@
   a,
   a:visited {
     cursor: pointer;
-    color: #3498db;
+    color: #8080F2;
   }
 
   a:hover,
   a:focus,
   a:active {
-    color: #2980b9;
+    color: #4B32C3;
+    text-decoration: underline;
   }
 
   p {

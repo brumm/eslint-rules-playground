@@ -18,7 +18,7 @@ export default class Rule extends React.Component {
   scrollIntoView(node) {
     setTimeout(() => (
       node.parentElement.parentElement.scrollTop = node.offsetTop - 99
-    ), 100)
+    ), 50)
   }
 
   shouldComponentUpdate({ isExpanded, isActive, ruleValue}) {
@@ -41,6 +41,7 @@ export default class Rule extends React.Component {
         id: name,
         docs,
         schema,
+        deprecated: isDeprecated,
       },
       ruleValue,
       isActive,
@@ -54,20 +55,28 @@ export default class Rule extends React.Component {
         <Flex className={css.header}>
           <Switch
             onChange={active => onToggleRule(name, active)}
-            circleStyles={{ diameter: 15 }}
+            circleStyles={{ diameter: 15, onColor: '#4B32C3' }}
             switchStyles={{ width: 35, padding: 3, borderColor: '#DDDDDD' }}
             value={isActive}
           />
 
           <Link to={`/${isExpanded ? '' : name}`} className={css.link}>
             <Flex alignItems='center' grow={1} className={css.nameContainer}>
-              <div className={isActive || css.nameInactive}>{name}</div>
+              <div className={ isDeprecated ? css.nameDeprecated : '' }>
+                {name}
+              </div>
+              {isDeprecated && docs.replacedBy.length > 0 &&
+                <div>
+                  <Octicon name='arrow-right' style={{ margin: '0 10px' }} />
+                  {docs.replacedBy.join(', ')}
+                </div>
+              }
             </Flex>
 
             {docs.recommended &&
               <Octicon name='thumbsup' className={css.recommended} />
             }
-            <Octicon className={css.expando} name={isExpanded ? 'dash' : 'plus'} />
+            <Octicon className={css.expando} name={isExpanded ? 'chevron-up' : 'chevron-down'} />
           </Link>
         </Flex>
 
@@ -94,6 +103,7 @@ export default class Rule extends React.Component {
               ) : (
                 <Flex direction='column' style={{ height: 200 }} alignItems='center' justifyContent='center'>
                   <MoonLoader color='#777777' />
+                  <div style={{ marginTop: 10 }}>Loading docs</div>
                 </Flex>
               )}
             </Pinky>

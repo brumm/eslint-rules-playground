@@ -3,12 +3,17 @@ import Flex from 'flex-component'
 import SimpleInput from 'react-simple-input'
 import Switch from 'react-flexible-switch'
 import Match from 'react-router/Match'
-import GitHubForkRibbon from 'react-github-fork-ribbon';
 
 import Editor from 'components/Editor/Editor'
 import RulesContainer from 'components/RulesContainer/RulesContainer'
 
 import css from './App.scss'
+
+const GithubBadge = ({ href, target , children }) => (
+  <a href={href} target={target}>
+    {children}
+  </a>
+)
 
 
 class App extends React.Component {
@@ -25,9 +30,7 @@ class App extends React.Component {
         sourceType: 'module'
       },
     },
-    localRuleConfig: {
-      // 'no-unused-vars': 'off'
-    },
+    localRuleConfig: {},
     editorValue: `var foo = 'bar'`,
     showEditor: true,
   }
@@ -74,16 +77,16 @@ class App extends React.Component {
             className={css.toggleContainer}
             alignItems='center'
           >
-            <img src='http://eslint.org/img/logo.svg' className={css.logo} />
+            {/* <img src='http://eslint.org/img/logo.svg' className={css.logo} /> */}
 
-            <div onClick={() => this.setState({ showEditor: false })}>Eslint Config</div>
-            <Switch
-              value={showEditor}
-              circleStyles={{ diameter: 15 }}
-              switchStyles={{ width: 35, padding: 3, borderColor: '#DDDDDD', margin: '0 20px' }}
-              onChange={showEditor => this.setState({ showEditor })}
-            />
             <div onClick={() => this.setState({ showEditor: true })}>Example Code</div>
+            <Switch
+              value={!showEditor}
+              circleStyles={{ diameter: 15, onColor: '#4B32C3', offColor: '#4B32C3' }}
+              switchStyles={{ width: 35, padding: 3, borderColor: '#DDDDDD', margin: '0 20px' }}
+              onChange={showEditor => this.setState({ showEditor: !showEditor })}
+            />
+            <div onClick={() => this.setState({ showEditor: false })}>Eslint Config</div>
           </Flex>
 
           <SimpleInput
@@ -132,14 +135,9 @@ class App extends React.Component {
           )} />
         </Flex>
 
-      <GitHubForkRibbon
-        position='left-bottom'
-        color='black'
-        href='//github.com/brumm/eslint-rules-playground'
-        target='_blank'
-      >
-        Fork me on GitHub
-      </GitHubForkRibbon>
+      <GithubBadge href='//github.com/brumm/eslint-rules-playground' target='_blank' >
+        GitHub
+      </GithubBadge>
       </Flex>
     )
   }
