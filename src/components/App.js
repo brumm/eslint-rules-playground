@@ -3,6 +3,7 @@ import Flex from 'flex-component'
 import SimpleInput from 'react-simple-input'
 import Switch from 'react-flexible-switch'
 import Match from 'react-router/Match'
+import GitHubForkRibbon from 'react-github-fork-ribbon';
 
 import Editor from 'components/Editor/Editor'
 import RulesContainer from 'components/RulesContainer/RulesContainer'
@@ -27,7 +28,7 @@ class App extends React.Component {
     localRuleConfig: {
       // 'no-unused-vars': 'off'
     },
-    editorValue: `var foo = "bar"`,
+    editorValue: `var foo = 'bar'`,
     showEditor: true,
   }
 
@@ -117,7 +118,7 @@ class App extends React.Component {
           )}
 
             <Flex className={css.rules} direction='column'>
-              <Match exactly pattern="/:ruleId?" render={({ params: { ruleId = undefined }}) => (
+              <Match exactly pattern='/:ruleId?' render={({ params: { ruleId = undefined }}) => (
                 <RulesContainer
                   expandedId={ruleId}
                   ruleDefinitions={ruleDefinitions}
@@ -131,6 +132,14 @@ class App extends React.Component {
           )} />
         </Flex>
 
+      <GitHubForkRibbon
+        position='left-bottom'
+        color='black'
+        href='//github.com/brumm/eslint-rules-playground'
+        target='_blank'
+      >
+        Fork me on GitHub
+      </GitHubForkRibbon>
       </Flex>
     )
   }
