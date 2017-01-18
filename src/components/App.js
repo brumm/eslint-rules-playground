@@ -3,6 +3,7 @@ import Flex from 'flex-component'
 import SimpleInput from 'react-simple-input'
 import Switch from 'react-flexible-switch'
 import Match from 'react-router/Match'
+import Octicon from 'react-octicon'
 
 import Editor from 'components/Editor/Editor'
 import RulesContainer from 'components/RulesContainer/RulesContainer'
@@ -10,7 +11,7 @@ import RulesContainer from 'components/RulesContainer/RulesContainer'
 import css from './App.scss'
 
 const GithubBadge = ({ href, target , children }) => (
-  <a href={href} target={target}>
+  <a href={href} target={target} className={css.githubBadge}>
     {children}
   </a>
 )
@@ -136,7 +137,7 @@ class App extends React.Component {
         </Flex>
 
       <GithubBadge href='//github.com/brumm/eslint-rules-playground' target='_blank' >
-        GitHub
+        <Octicon name='mark-github' style={{ fontSize: 20 }} />
       </GithubBadge>
       </Flex>
     )
