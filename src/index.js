@@ -44,8 +44,8 @@ render(
           } else {
               return (
                 <Flex direction='column' style={{ height: '100vh' }} alignItems='center' justifyContent='center'>
-                  <div style={{ marginBottom: 30 }}>Fetching latest eslint rules...</div>
                   <MoonLoader color='#777777' />
+                  <div style={{ marginTop: 30 }}>Fetching latest eslint rules...</div>
                 </Flex>
               )
           }

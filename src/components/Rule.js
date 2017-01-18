@@ -103,7 +103,7 @@ export default class Rule extends React.Component {
               ) : (
                 <Flex direction='column' style={{ height: 200 }} alignItems='center' justifyContent='center'>
                   <MoonLoader color='#777777' />
-                  <div style={{ marginTop: 10 }}>Loading docs</div>
+                  <div style={{ marginTop: 30 }}>Loading docs</div>
                 </Flex>
               )}
             </Pinky>
