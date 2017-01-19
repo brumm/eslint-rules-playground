@@ -12,11 +12,18 @@ import * as MarkdownTypes from 'components/MarkdownTypes/MarkdownTypes.js'
 
 import css from './Rule.scss'
 
+const isPositionStickySupported = () => {
+  const element = document.createElement('div')
+  element.style.cssText = 'position: sticky'
+  return element.style.position === 'sticky'
+}
+
 export default class Rule extends React.Component {
 
   scrollIntoView(node) {
+    const canSticky = isPositionStickySupported()
     setTimeout(() => (
-      node.parentElement.parentElement.scrollTop = node.offsetTop - 99
+      node.parentElement.parentElement.scrollTop = node.offsetTop - (canSticky ? 50 : 0)
     ), 50)
   }
 

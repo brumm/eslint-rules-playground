@@ -2,6 +2,7 @@
   overflow-y: auto;
   box-shadow: 0 1px 0 #DDDDDD;
   height: calc(100vh - 50px);
+  position: relative;
 }
 
 .label {
@@ -12,6 +13,7 @@
   box-shadow:
     0 -1px 0 #DDDDDD,
     0 1px 0 #DDDDDD;
+
   z-index: 11;
   position: sticky;
   top: 0;

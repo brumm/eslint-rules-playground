@@ -1,20 +1,18 @@
 
 .container {
-  & + & .header {
-    box-shadow:
-      0 1px 0 #DDDDDD,
-      0 -1px 0 #DDDDDD;
-  }
 }
 
 .header {
   height: 35px;
   padding: 0 10px;
   background-color: #F7F7F7;
-  box-shadow: 0 1px 0 #DDDDDD;
+  box-shadow:
+    0 1px 0 #DDDDDD,
+    0 -1px 0 #DDDDDD;
   display: flex;
   flex-grow: 1;
   align-items: center;
+
   z-index: 10;
   position: sticky;
   top: 50px;
