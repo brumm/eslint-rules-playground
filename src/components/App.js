@@ -7,15 +7,9 @@ import Octicon from 'react-octicon'
 
 import Editor from 'components/Editor/Editor'
 import RulesContainer from 'components/RulesContainer/RulesContainer'
+import GithubBadge from 'components/GithubBadge/GithubBadge'
 
 import css from './App.scss'
-
-const GithubBadge = ({ href, target , children }) => (
-  <a href={href} target={target} className={css.githubBadge}>
-    {children}
-  </a>
-)
-
 
 class App extends React.Component {
   state = {
