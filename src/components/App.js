@@ -14,6 +14,9 @@ import css from './App.scss'
 class App extends React.Component {
   state = {
     filterText: '',
+    editorValue: `var foo = 'bar'`,
+    showEditor: true,
+
     localLinterConfig: {
       parserOptions: {
         ecmaVersion: 6,
@@ -26,8 +29,6 @@ class App extends React.Component {
       },
     },
     localRuleConfig: {},
-    editorValue: `var foo = 'bar'`,
-    showEditor: true,
   }
 
   updateCode = editorValue => this.setState({ editorValue })
