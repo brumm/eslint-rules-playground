@@ -6,7 +6,7 @@
   "scripts": {
     "build": "nwb build-react-app",
     "clean": "nwb clean-app",
-    "start": "nwb serve-react-app",
+    "start": "nwb serve --port 8080 --reload --fallback",
     "deploy": "surge --project ./dist/ --domain eslint-playground.surge.sh",
     "release": "npm run build && cp ./dist/index.html ./dist/200.html && npm run deploy",
     "test": "nwb test",
