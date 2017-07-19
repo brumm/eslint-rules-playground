@@ -10,6 +10,7 @@ import 'react-codemirror/node_modules/codemirror/addon/lint/lint'
 
 import css from './Editor.scss'
 
+const Linter = new window.eslint()
 
 function getSeverity(error) {
   switch (error.severity) {
@@ -75,7 +76,7 @@ export default class Editor extends React.Component {
 
   get lint() {
     return text => (
-      window.eslint.verify(text, {
+      Linter.verify(text, {
         ...this.props.activeLinterConfig,
         rules: this.props.activeRuleConfig
       }).map(error => ({
