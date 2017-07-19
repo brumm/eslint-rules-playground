@@ -98,20 +98,33 @@ export default class Rule extends React.Component {
             /> */}
 
             <Pinky promise={this.fetchDocs(name)}>
-              {({ resolved }) => resolved ? (
-                <ReactMarkdown
-                  source={resolved}
-                  renderers={{
-                    ...MarkdownTypes,
-                    CodeBlock: props => React.createElement(MarkdownTypes.CodeBlock, { setCode, ...props })
-                  }}
-                />
-              ) : (
-                <Flex direction='column' style={{ height: 200 }} alignItems='center' justifyContent='center'>
-                  <MoonLoader color='#777777' />
-                  <div style={{ marginTop: 30 }}>Loading docs</div>
-                </Flex>
-              )}
+              {({ resolved, rejected }) => {
+                if (resolved) {
+                  return (
+                    <ReactMarkdown
+                      source={resolved}
+                      renderers={{
+                        ...MarkdownTypes,
+                        CodeBlock: props => React.createElement(MarkdownTypes.CodeBlock, { setCode, ...props })
+                      }}
+                    />
+                  )
+                } else if (rejected) {
+                  return (
+                    <Flex direction='column' style={{ height: '100vh' }} alignItems='center' justifyContent='center'>
+                      <div style={{ color: '#4B32C3', fontSize: 60 }}>:(</div>
+                      <div style={{ marginTop: 30 }}>Something went wrong, please try again later.</div>
+                    </Flex>
+                  )
+                } else {
+                  return (
+                    <Flex direction='column' style={{ height: 200 }} alignItems='center' justifyContent='center'>
+                      <MoonLoader color='#4B32C3' />
+                      <div style={{ marginTop: 30 }}>Loading docs</div>
+                    </Flex>
+                  )
+                }
+              }}
             </Pinky>
           </div>
         }

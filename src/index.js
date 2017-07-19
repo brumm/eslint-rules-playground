@@ -7,12 +7,11 @@ import Flex from 'flex-component'
 import { MoonLoader } from 'halogen'
 import Router from 'react-router/BrowserRouter'
 
-import App from 'components/App'
+import App, { Container } from 'components/App'
 import mockPromise from 'mock'
 
 const fetchJSON = url => fetch(url).then(response => response.json())
-// const isDev = process.env.NODE_ENV === 'development'
-const isDev = false
+const isDev = process.env.NODE_ENV === 'development'
 
 const fetchPromise = isDev
   ? mockPromise
@@ -45,16 +44,21 @@ render(
             )
           } else if (rejected) {
             return (
-              <Flex direction='column' style={{ height: '100vh' }} alignItems='center' justifyContent='center'>
-                Something went wrong, please try again later.
-              </Flex>
+              <Container>
+                <Flex direction='column' style={{ height: '100vh' }} alignItems='center' justifyContent='center'>
+                  <div style={{ color: '#4B32C3', fontSize: 60 }}>:(</div>
+                  <div style={{ marginTop: 30 }}>Something went wrong, please try again later.</div>
+                </Flex>
+              </Container>
             )
           } else {
               return (
-                <Flex direction='column' style={{ height: '100vh' }} alignItems='center' justifyContent='center'>
-                  <MoonLoader color='#4B32C3' />
-                  <div style={{ marginTop: 30 }}>Fetching latest eslint rules...</div>
-                </Flex>
+                <Container>
+                  <Flex direction='column' style={{ height: '100vh' }} alignItems='center' justifyContent='center'>
+                    <MoonLoader color='#4B32C3' />
+                    <div style={{ marginTop: 30 }}>Fetching latest eslint rules...</div>
+                  </Flex>
+                </Container>
               )
           }
         }}

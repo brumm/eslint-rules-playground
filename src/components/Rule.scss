@@ -113,7 +113,11 @@
   }
 
   h4 {
-    font-size: 0.71rem;
+    font-size: 1rem;
+    code {
+      background-color: transparent !important;
+      padding: 0 !important;
+    }
   }
 
   h5 {

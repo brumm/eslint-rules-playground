@@ -11,6 +11,15 @@ import GithubBadge from 'components/GithubBadge/GithubBadge'
 
 import css from './App.scss'
 
+export const Container = ({ children }) => (
+  <Flex direction='column' className={css.app}>
+    {children}
+    <GithubBadge href='//github.com/brumm/eslint-rules-playground' target='_blank' >
+      <Octicon name='mark-github' style={{ fontSize: 20 }} />
+    </GithubBadge>
+  </Flex>
+)
+
 class App extends React.Component {
   state = {
     filterText: '',
@@ -65,7 +74,7 @@ class App extends React.Component {
     }
 
     return (
-      <Flex direction='column' className={css.app}>
+      <Container>
 
         <Flex shrink={0} className={css.header}>
           <Flex
@@ -130,11 +139,7 @@ class App extends React.Component {
             </Flex>
           )} />
         </Flex>
-
-      <GithubBadge href='//github.com/brumm/eslint-rules-playground' target='_blank' >
-        <Octicon name='mark-github' style={{ fontSize: 20 }} />
-      </GithubBadge>
-      </Flex>
+      </Container>
     )
   }
 }
