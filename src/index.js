@@ -15,8 +15,8 @@ const fetchJSON = url => fetch(url).then(response => response.json())
 const fetchPromise = process.env.NODE_ENV === 'development'
   ? mockPromise
   : Promise.all([
-    fetchJSON('https://runkit.io/brumm/serve-eslint-rules/branches/master/defaults'),
-    fetchJSON('https://runkit.io/brumm/serve-eslint-rules/branches/master/rules'),
+    fetchJSON('https://runkit.io/brumm/serve-eslint-rules-fixed/branches/master/defaults'),
+    fetchJSON('https://runkit.io/brumm/serve-eslint-rules-fixed/branches/master/rules'),
   ])
 
 render(
