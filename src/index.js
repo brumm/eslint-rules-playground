@@ -11,8 +11,10 @@ import App from 'components/App'
 import mockPromise from 'mock'
 
 const fetchJSON = url => fetch(url).then(response => response.json())
+// const isDev = process.env.NODE_ENV === 'development'
+const isDev = false
 
-const fetchPromise = process.env.NODE_ENV === 'development'
+const fetchPromise = isDev
   ? mockPromise
   : Promise.all([
     fetchJSON('https://runkit.io/brumm/serve-eslint-rules-fixed/branches/master/defaults'),
@@ -22,7 +24,7 @@ const fetchPromise = process.env.NODE_ENV === 'development'
 render(
   <Router>
     <Pinky promise={fetchPromise}>
-        {({ resolved }) => {
+        {({ resolved, rejected }) => {
           if (resolved) {
             const [
               defaults,
@@ -41,10 +43,16 @@ render(
                 ruleDefinitions={ruleDefinitions}
               />
             )
+          } else if (rejected) {
+            return (
+              <Flex direction='column' style={{ height: '100vh' }} alignItems='center' justifyContent='center'>
+                Something went wrong, please try again later.
+              </Flex>
+            )
           } else {
               return (
                 <Flex direction='column' style={{ height: '100vh' }} alignItems='center' justifyContent='center'>
-                  <MoonLoader color='#777777' />
+                  <MoonLoader color='#4B32C3' />
                   <div style={{ marginTop: 30 }}>Fetching latest eslint rules...</div>
                 </Flex>
               )
